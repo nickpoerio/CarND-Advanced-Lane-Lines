@@ -17,13 +17,16 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./output_images/calib_img2_undistort.png "Undistorted"
-[image2]: ./test_images/test1.jpg "Road Transformed"
-[image2bis]: ./output_images/test1_undistort.jpg "Undistorted"
-[image3]: ./examples/binary_combo_example.jpg "Binary Example"
-[image4]: ./examples/warped_straight_lines.jpg "Warp Example"
-[image5]: ./examples/color_fit_lines.jpg "Fit Visual"
-[image6]: ./examples/example_output.jpg "Output"
+[image1]: ./output_images/calib_img2_undistort.png "Undistorted calibration image"
+[image2]: ./test_images/test1.jpg "Test 1 image"
+[image2bis]: ./output_images/test1_undistort.jpg "Undistorted test image"
+[image3]: ./output_images/test1_binary.jpg "Binary Example"
+[image4]: ./output_images/warped_straight_lines.png "Warp Example"
+[image5]: ./output_images/straight1_fit.jpg "Fit straight1"
+[image5bis]: ./output_images/test1_fit.jpg "Fit test1"
+[image5tris]: ./output_images/test2_fit.jpg "Fit test2"
+[image6]: ./output_images/straight1_output.jpg "Output straight1"
+[image6bis]: ./output_images/test1_output.jpg "Output test1"
 [video1]: ./project_video.mp4 "Video"
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/571/view) Points
@@ -48,7 +51,7 @@ I then used the output `objpoints` and `imgpoints` to compute the camera calibra
 
 #### 1. Provide an example of a distortion-corrected image.
 
-To demonstrate this step, I will describe how I apply the distortion correction to one of the test images like this one:
+To demonstrate this step, I will describe how I apply the distortion correction to one of the test images (test1) like this one:
 ![alt text][image2]
 
 And here's the undistorted version:
@@ -66,10 +69,10 @@ The code for my perspective transform includes a function called `warper()`, whi
 
 ```python
 src = np.float32(
-    [[(img_size[0] / 2) - 55, img_size[1] / 2 + 100],
+    [[(img_size[0] / 2) - 63, img_size[1] / 2 + 100],
     [((img_size[0] / 6) - 10), img_size[1]],
     [(img_size[0] * 5 / 6) + 60, img_size[1]],
-    [(img_size[0] / 2 + 55), img_size[1] / 2 + 100]])
+    [(img_size[0] / 2 + 63), img_size[1] / 2 + 100]])
 dst = np.float32(
     [[(img_size[0] / 4), 0],
     [(img_size[0] / 4), img_size[1]],
@@ -81,10 +84,10 @@ This resulted in the following source and destination points:
 
 | Source        | Destination   | 
 |:-------------:|:-------------:| 
-| 585, 460      | 320, 0        | 
+| 578, 460      | 320, 0        | 
 | 203, 720      | 320, 720      |
 | 1127, 720     | 960, 720      |
-| 695, 460      | 960, 0        |
+| 703, 460      | 960, 0        |
 
 I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
 
