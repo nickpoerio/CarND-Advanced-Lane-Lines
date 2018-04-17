@@ -19,7 +19,7 @@ The goals / steps of this project are the following:
 
 [image1]: ./output_images/calib_img2_undistort.png "Undistorted"
 [image2]: ./test_images/test1.jpg "Road Transformed"
-[image2bis]: ./output_images/test1_undistort.png "Undistorted"
+[image2bis]: ./output_images/test1_undistort.jpg "Undistorted"
 [image3]: ./examples/binary_combo_example.jpg "Binary Example"
 [image4]: ./examples/warped_straight_lines.jpg "Warp Example"
 [image5]: ./examples/color_fit_lines.jpg "Fit Visual"
