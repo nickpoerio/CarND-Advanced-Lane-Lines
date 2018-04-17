@@ -51,7 +51,7 @@ I then used the output `objpoints` and `imgpoints` to compute the camera calibra
 
 #### 1. Provide an example of a distortion-corrected image.
 
-To demonstrate this step, I will describe how I apply the distortion correction to one of the test images (test1) like this one:
+To demonstrate this step, I show how I apply the distortion correction to one of the test images (test1):
 ![alt text][image2]
 
 And here's the undistorted version:
@@ -59,13 +59,15 @@ And here's the undistorted version:
 
 #### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
 
-I used a combination of color and gradient thresholds to generate a binary image (thresholding steps at lines # through # in `another_file.py`).  Here's an example of my output for this step.  (note: this is not actually from one of the test images)
+I used a combination of color thresholds (RGB,HLS,GRAY) to generate a binary image (cell #4).  Here's an example of my output for this step, again from 'test1' example.
 
 ![alt text][image3]
 
+See cell #5 or output_images folder for further examples.
+
 #### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
 
-The code for my perspective transform includes a function called `warper()`, which appears in lines 1 through 8 in the file `example.py` (output_images/examples/example.py) (or, for example, in the 3rd code cell of the IPython notebook).  The `warper()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
+The code for my perspective transform includes a function called `warper()`, which appears in cell #7 of the IPython notebook.  The `warper()` function takes as inputs an image (`img`), as well as the mapping matrix.  I chose the hardcode the source and destination points in the following manner:
 
 ```python
 src = np.float32(
@@ -95,19 +97,26 @@ I verified that my perspective transform was working as expected by drawing the 
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
-Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
+I implemented the window search function (cell #11) and fit my lane lines with a 2nd order polynomial. Here's a few examples:
 
 ![alt text][image5]   ![alt text][image5bis]   ![alt text][image5tris]
 
+I also implemented an "informed" version of the window search (cell #12), which will mostly be used in the video processing pipeline (see next).
+
+In both implementations, the code is quite robust for missing lines.
+
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
-I did this in lines # through # in my code in `my_other_file.py`
+In cell #13 of my IPython notebook I implemented the curve radius calculation and the position of the vehicle.
+The left and right radii are calculated analitically on the polynomial fits at the bottom of the image. The radius is then considered the average of these two values. The vehicle position is considered to be in the center of the image. The lane center is considered to be the average between left and right lines, again at the bottom of the image.
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
-I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
+In cell #15 I implemented the final processing, that is the lane drawing on the undistorted image. See a couple of examples here:
 
 ![alt text][image6]   ![alt text][image6bis]
+
+Curve radius and lateral position are noted at the top left corner of the image. Observe that if the radius is greater than 10000 m, the road is considered to be straight.
 
 ---
 
@@ -117,10 +126,16 @@ I implemented this step in lines # through # in my code in `yet_another_file.py`
 
 Here's a [link to my video result](./project_video.mp4)
 
+The smoothness of the output has been assured applying a linear moving average on line fits (see cell #17)
+
 ---
 
 ### Discussion
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+The most critical part and also the part where more improvements can be introduced is the binarization. Further analysis should be carried on different test images, e.g. taken from the most challenging videos.
+
+For the last video, the interpolation should be limited at a certain distance, otherwise a quadratic polynomial fitting would not be  sufficient.
+
+I am quite satisfied with the linear moving average filtering approach for the basic challenge, but it is possible that the exponentially weighted average would work better for more complex scenarios (e.g. the harder one).
