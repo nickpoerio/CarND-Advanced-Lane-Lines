@@ -22,11 +22,11 @@ The goals / steps of this project are the following:
 [image2bis]: ./output_images/test1_undistort.jpg "Undistorted test image"
 [image3]: ./output_images/test1_binary.jpg "Binary Example"
 [image4]: ./output_images/warped_straight_lines.png "Warp Example"
-[image5]: ./output_images/straight1_fit.jpg "Fit straight1"
-[image5bis]: ./output_images/test1_fit.jpg "Fit test1"
-[image5tris]: ./output_images/test2_fit.jpg "Fit test2"
-[image6]: ./output_images/straight1_output.jpg "Output straight1"
-[image6bis]: ./output_images/test1_output.jpg "Output test1"
+[image5]: ./output_images/straight1_fit.png "Fit straight1"
+[image5bis]: ./output_images/test1_fit.png "Fit test1"
+[image5tris]: ./output_images/test2_fit.png "Fit test2"
+[image6]: ./output_images/straight1_output.png "Output straight1"
+[image6bis]: ./output_images/test1_output.png "Output test1"
 [video1]: ./project_video.mp4 "Video"
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/571/view) Points
