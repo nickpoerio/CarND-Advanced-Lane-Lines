@@ -67,7 +67,7 @@ See cell #5 or output_images folder for further examples.
 
 #### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
 
-The code for my perspective transform includes a function called `warper()`, which appears in cell #7 of the IPython notebook.  The `warper()` function takes as inputs an image (`img`), as well as the mapping matrix.  I chose the hardcode the source and destination points in the following manner:
+The code for my perspective transform includes a function called `warper()`, which appears in cell #7 of the IPython notebook.  The `warper()` function takes as inputs an image, as well as the mapping matrix.  I chose the hardcode the source and destination points in the following manner:
 
 ```python
 src = np.float32(
@@ -103,12 +103,12 @@ I implemented the window search function (cell #11) and fit my lane lines with a
 
 I also implemented an "informed" version of the window search (cell #12), which will mostly be used in the video processing pipeline (see next).
 
-In both implementations, the code is quite robust for missing lines.
+In both implementations, the code is quite robust for missing lines: supposing straight lines for the blind search, keeping the previous value for the informed search.
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
 In cell #13 of my IPython notebook I implemented the curve radius calculation and the position of the vehicle.
-The left and right radii are calculated analitically on the polynomial fits at the bottom of the image. The radius is then considered the average of these two values. The vehicle position is considered to be in the center of the image. The lane center is considered to be the average between left and right lines, again at the bottom of the image.
+The left and right radii are calculated analytically on the polynomial fits at the bottom of the image. The radius is then considered the average of these two values. The vehicle position is considered to be in the center of the image. The lane center is considered to be the average between left and right lines, again at the bottom of the image.
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
@@ -116,7 +116,7 @@ In cell #15 I implemented the final processing, that is the lane drawing on the 
 
 ![alt text][image6]   ![alt text][image6bis]
 
-Curve radius and lateral position are noted at the top left corner of the image. Observe that if the radius is greater than 10000 m, the road is considered to be straight.
+Curve radius and lateral position are noted at the top left corner of the image. Observe that if the radius is greater than 10 km, the road is considered to be straight.
 
 ---
 
@@ -136,6 +136,6 @@ The smoothness of the output has been assured applying a linear moving average o
 
 The most critical part and also the part where more improvements can be introduced is the binarization. Further analysis should be carried on different test images, e.g. taken from the most challenging videos.
 
-For the last video, the interpolation should be limited at a certain distance, otherwise a quadratic polynomial fitting would not be  sufficient.
+For the hardest video, the interpolation should be limited at a certain distance, otherwise a quadratic polynomial fitting would not be  sufficient.
 
-I am quite satisfied with the linear moving average filtering approach for the basic challenge, but it is possible that the exponentially weighted average would work better for more complex scenarios (e.g. the harder one).
+I am quite satisfied with the linear moving average filtering approach for the basic challenge, but it is possible that the exponentially weighted average would work better for more complex scenarios (e.g. the hardest one).
